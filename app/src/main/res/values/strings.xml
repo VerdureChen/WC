@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">tab</string>
+    <string name="first">恭喜</string>
+    <string name="second">你</string>
+    <string name="third">成功</string>
+</resources>
