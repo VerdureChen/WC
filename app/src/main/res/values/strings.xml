@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">tab</string>
-    <string name="first">恭喜</string>
+    <string name="first">请选择生成词云的文本来源：</string>
+    <string name="c1">txt文件</string>
+    <string name="c2">word文件</string>
+    <string name="c3">url链接</string>
+    <string name="p11">上传txt文件</string>
+    <string name="p12">上传Word文件</string>
+    <string name="p13">输入URL地址</string>
+    <string name="page2">请选择背景图片来源：</string>
+    <string name="p21">从相册中选择</string>
+    <string name="p22">从模板中选择</string>
+    <string name="p211">从相册中选取</string>
     <string name="second">你</string>
-    <string name="third">成功</string>
+    <string name="third">敬请期待</string>
 </resources>

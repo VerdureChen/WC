@@ -3,10 +3,31 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/page2"
+        android:textSize="25sp"
+        />
+    <RadioGroup
+        android:id="@+id/RadioGroup02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/RadioButton01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/p21"/>
+        <RadioButton
+            android:id="@+id/RadioButton02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/p22"/>
+    </RadioGroup>
+    <LinearLayout
+        android:id="@+id/fragmentContainer02"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/second"
-        android:textSize="100sp"
-        />
+        android:orientation="vertical">
+
+    </LinearLayout>
 </LinearLayout>
