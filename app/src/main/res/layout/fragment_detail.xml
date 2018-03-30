@@ -14,19 +14,25 @@
         android:layout_height="wrap_content">
         <RadioButton
             android:id="@+id/RadioButton01"
+            android:checked="true"
+            android:button="@drawable/myradiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:textSize="20sp"
             android:text="@string/c1"/>
         <RadioButton
             android:id="@+id/RadioButton02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/myradiobutton"
+            android:textSize="20sp"
             android:text="@string/c2"/>
         <RadioButton
             android:id="@+id/RadioButton03"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/myradiobutton"
             android:text="@string/c3"/>
     </RadioGroup>
     <LinearLayout

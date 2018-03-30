@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tab</string>
+    <string name="app_name">炫云</string>
     <string name="first">请选择生成词云的文本来源：</string>
     <string name="c1">txt文件</string>
     <string name="c2">word文件</string>
@@ -13,4 +13,5 @@
     <string name="p211">从相册中选取</string>
     <string name="second">你</string>
     <string name="third">敬请期待</string>
+    <string name="cong">词云图片:</string>
 </resources>

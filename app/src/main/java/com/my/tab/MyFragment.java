@@ -23,12 +23,18 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
         View v=inflater.inflate(R.layout.fragment_detail,container,false);
         return v;
     }
+
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         RadioGroup mRadioGroup1 = (RadioGroup) getActivity().findViewById(R.id.RadioGroup01);
         mRadioGroup1.setOnCheckedChangeListener(this);
     }
+
+
+
     @Override
     public void onCheckedChanged(RadioGroup rdp,int checkedId){
         switch(checkedId){
@@ -45,6 +51,9 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
         }
 
     }
+
+
+
 
 
     public void changeButton(int i){

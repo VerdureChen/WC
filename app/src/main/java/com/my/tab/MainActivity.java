@@ -6,27 +6,28 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
-
-import static android.R.attr.fragment;
 
 public class MainActivity extends AppCompatActivity {
     PagerSlidingTabStrip pst;
     ViewPager viewPager;
     ArrayList<Fragment> fragments;
-    String[] titles = {"文本来源", "背景图片", "敬请期待","敬请期待","生成图片"};
+    String[] titles = {"文本", "模板", "参数","词表","词云"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        toolbar.inflateMenu(R.menu.menu_main);
         pst = (PagerSlidingTabStrip) findViewById(R.id.pst);
         viewPager = (ViewPager) findViewById(R.id.pager);
         fragments = new ArrayList<>();
@@ -42,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(myFragment5);
         FragmentManager fragmentManager = getSupportFragmentManager();
         viewPager.setAdapter(new MyPagerAdapter(fragmentManager, titles, fragments));
+        setPagerSliding(pst);
         viewPager.setCurrentItem(0);
         //当ViewPager的onPagerChangeListener回调时，PagerSlidingTabStrip也一起随之变动
         //具体做法都已封装到了PagerSlidingTabStrip.setViewPager()方法里，使用时调用实例如下
-        setPagerSliding(pst);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -72,19 +74,20 @@ public class MainActivity extends AppCompatActivity {
             TextView textView = (TextView) tabsContainer.getChildAt(i);
             if(position == i) {
                 textView.setTextSize(18);
-                textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                textView.setTextColor(getResources().getColor(R.color.toolbarcol));
             } else {
-                textView.setTextSize(12);
-                textView.setTextColor(getResources().getColor(R.color.yellow));
+                textView.setTextSize(15);
+                textView.setTextColor(getResources().getColor(R.color.gray1));
             }
         }
     }
 
 
+
     public void setPagerSliding(PagerSlidingTabStrip p) {
         p.setViewPager(viewPager);
         p.setTextSize(50);
-        p.setDividerWidth(5);
+        p.setDividerWidth(0);
         p.setDividerPadding(20);
         p.setDividerColor(R.color.yellow);
         p.setTextColor(R.color.tabcolor);
@@ -120,6 +123,16 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return fragments.size();
         }
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 }

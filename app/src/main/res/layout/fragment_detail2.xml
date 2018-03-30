@@ -16,11 +16,16 @@
             android:id="@+id/RadioButton01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/myradiobutton"
+            android:textSize="20sp"
             android:text="@string/p21"/>
         <RadioButton
             android:id="@+id/RadioButton02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/myradiobutton"
+            android:textSize="20sp"
+            android:checked="true"
             android:text="@string/p22"/>
     </RadioGroup>
     <LinearLayout
