@@ -31,6 +31,7 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
         super.onActivityCreated(savedInstanceState);
         RadioGroup mRadioGroup1 = (RadioGroup) getActivity().findViewById(R.id.RadioGroup01);
         mRadioGroup1.setOnCheckedChangeListener(this);
+        mRadioGroup1.check(R.id.RadioButton01);
     }
 
 
@@ -60,6 +61,8 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
         LinearLayout rootLayout = (LinearLayout)getActivity().findViewById(R.id.fragmentContainer01);
         rootLayout.removeAllViews();
         Button button = new Button(getActivity());
+        //button.setTextColor(getResources().getColor(R.color.gray1));
+        button.setBackgroundResource(R.drawable.mybutton);
         LinearLayout.LayoutParams button_parent_params= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         switch (i){
             case 01:
@@ -67,6 +70,12 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
                 break;
             case 02:
                 button.setText(R.string.p12);
+                button.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.dialog2.show();
+                    }
+                });
                 break;
             case 03:
                 EditText ed= new EditText(getActivity());

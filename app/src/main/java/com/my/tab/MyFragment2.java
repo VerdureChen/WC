@@ -1,4 +1,5 @@
 package com.my.tab;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -63,8 +64,27 @@ public class MyFragment2 extends Fragment implements RadioGroup.OnCheckedChangeL
         super.onActivityCreated(savedInstanceState);
         RadioGroup mRadioGroup1 = (RadioGroup) getActivity().findViewById(R.id.RadioGroup02);
         mRadioGroup1.setOnCheckedChangeListener(this);
-
+        mRadioGroup1.check(R.id.RadioButton01);
     }
+
+//    CallbackBundle callback = new CallbackBundle() {
+//        Bundle bundle = new Bundle();
+//
+//        @Override
+//        public void callback(Bundle bundle) {
+//            //String filepath = bundle.getString("path");
+//            //setTitle(filepath); // 把文件路径显示在标题上
+//
+//        }
+//
+//
+//    };
+
+    //Context context = MyApplication.getInstance();
+
+//    Dialog dialog1 = OpenFileDialog.createDialog(0,context, "选择图片文件", callback,
+//            ".bmp;.jpg;.png;.gif;",MainActivity.images);
+
 
     /*void initData() {
         //图标
@@ -86,6 +106,8 @@ public class MyFragment2 extends Fragment implements RadioGroup.OnCheckedChangeL
 
 
 
+
+
     @Override
     public void onCheckedChanged(RadioGroup rdp, int checkedId) {
         switch (checkedId) {
@@ -102,28 +124,36 @@ public class MyFragment2 extends Fragment implements RadioGroup.OnCheckedChangeL
 
 
 
+
+
     public void changeButton(int i){
         LinearLayout rootLayout = (LinearLayout)getActivity().findViewById(R.id.fragmentContainer02);
         rootLayout.removeAllViews();
         switch (i){
             case 01:
                 Button button = new Button(getActivity());
+                button.setBackgroundResource(R.drawable.mybutton);
+               // button.setTextColor(getResources().getColor(R.color.gray1));
                 LinearLayout.LayoutParams button_parent_params= new LinearLayout.LayoutParams(LinearLayout.
                         LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                button.setText(R.string.p211);
+//                button.setText(R.string.p211);
+                button.setText("选择本地图片");
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Matisse.from(getActivity())
-                                .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF), false) // 选择 mime 的类型
-                                .countable(false)
-                                .maxSelectable(1) // 图片选择的最多数量
-                                .gridExpectedSize(400)
-                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                                .thumbnailScale(0.85f) // 缩略图的比例
-                                .theme(R.style.Matisse_Dracula)
-                                .imageEngine(new GlideEngine()) // 使用的图片加载引擎
-                                .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
+
+                        MainActivity.dialog1.show();
+
+//                        Matisse.from(getActivity())
+//                                .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF), false) // 选择 mime 的类型
+//                                .countable(false)
+//                                .maxSelectable(1) // 图片选择的最多数量
+//                                .gridExpectedSize(400)
+//                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                                .thumbnailScale(0.85f) // 缩略图的比例
+//                                .theme(R.style.Matisse_Dracula)
+//                                .imageEngine(new GlideEngine()) // 使用的图片加载引擎
+//                                .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
                     }
                 });
                 rootLayout.addView(button,button_parent_params);

@@ -1,32 +1,65 @@
 package com.my.tab;
 
+import android.app.Dialog;
+import android.content.ClipData;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.support.v7.appcompat.R.styleable.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    static int flag=0;
     PagerSlidingTabStrip pst;
-    ViewPager viewPager;
+    static  ViewPager viewPager;
     ArrayList<Fragment> fragments;
     String[] titles = {"文本", "模板", "参数","词表","词云"};
+    static Toolbar toolbar;
+
+
+
+    static Map<String, Integer> images = new HashMap<String, Integer>();
+    static Dialog dialog1;
+    static Dialog dialog2;
+    static CallbackBundle callback = new CallbackBundle() {
+        Bundle bundle = new Bundle();
+
+        @Override
+        public void callback(Bundle bundle) {
+            //String filepath = bundle.getString("path");
+            //setTitle(filepath); // 把文件路径显示在标题上
+
+        }
+
+
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        //setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
         pst = (PagerSlidingTabStrip) findViewById(R.id.pst);
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -47,6 +80,32 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(0);
         //当ViewPager的onPagerChangeListener回调时，PagerSlidingTabStrip也一起随之变动
         //具体做法都已封装到了PagerSlidingTabStrip.setViewPager()方法里，使用时调用实例如下
+
+
+
+
+
+
+
+
+
+
+
+
+        // 下面几句设置各文件类型的图标， 需要你先把图标添加到资源文件夹
+        images.put(OpenFileDialog.sRoot, R.drawable.filefolder);   // 根目录图标
+        images.put(OpenFileDialog.sParent, R.drawable.filefolder);    //返回上一层的图标
+        images.put(OpenFileDialog.sFolder, R.drawable.filefolder);   //文件夹图标
+        images.put("txt", R.drawable.txticon);   //txt文件图标
+        images.put("jpg", R.drawable.jpegiocn);
+        images.put(OpenFileDialog.sEmpty, R.drawable.empty);
+
+        dialog1 = OpenFileDialog.createDialog(0, this, "选择图片文件", callback,
+                ".bmp;.jpg;.png;.gif;",images);
+        dialog2 = OpenFileDialog.createDialog(1, this, "选择WORD文件", callback, ".txt;.doc;.docx;", images);
+
+        //MainActivity.imv = (ImageView)findViewById(R.id.imagefinal);
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -89,9 +148,6 @@ public class MainActivity extends AppCompatActivity {
         p.setTextSize(50);
         p.setDividerWidth(0);
         p.setDividerPadding(20);
-        p.setDividerColor(R.color.yellow);
-        p.setTextColor(R.color.tabcolor);
-
     }
 
 
@@ -108,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             this.titles = titles;
             this.fragments = fragments;
         }
+
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -134,5 +191,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
 }
