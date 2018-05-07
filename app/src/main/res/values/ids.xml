@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="mbtn1" type="id"></item>
+    <item name="mtv" type="id"></item>
+    <item name="mbtn2" type="id"></item>
+    <item name="mtv2" type="id"></item>
+</resources>

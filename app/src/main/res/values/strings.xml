@@ -3,10 +3,13 @@
     <string name="first">请选择生成词云的文本来源：</string>
     <string name="c1">txt文件</string>
     <string name="c2">word文件</string>
-    <string name="c3">url链接</string>
+    <string name="c3">url链接（功能尚未开放，敬请期待）</string>
+    <string name="c4">直接输入文本</string>
+    <string name="c5">语音输入</string>
     <string name="p11">上传txt文件</string>
     <string name="p12">上传Word文件</string>
     <string name="p13">输入URL地址</string>
+    <string name="p14">输入文本</string>
     <string name="page2">请选择背景图片来源：</string>
     <string name="p21">从本地图片中选择</string>
     <string name="p22">从模板中选择</string>
@@ -14,4 +17,16 @@
     <string name="second">你</string>
     <string name="third">敬请期待</string>
     <string name="cong">词云图片:</string>
+    <string name="diatit1">选择背景颜色</string>
+    <string name="diatit2">选择词云色调</string>
+    <string name="diatit3">选择字体</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="back1">点击设置图片背景颜色</string>
+    <string name="back2">点击设置词云色调</string>
+    <string name="back3">点击设置字体</string>
+    <string name="color1">viridis</string>
+    <string name="color2">plasma</string>
+    <string name="color3">magma</string>
+    <string name="color4">inferno</string>
 </resources>

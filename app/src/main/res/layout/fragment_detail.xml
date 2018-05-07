@@ -18,6 +18,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="20dp">
+
         <RadioButton
             android:id="@+id/RadioButton01"
             android:button="@drawable/myradiobutton"
@@ -33,6 +34,20 @@
             android:button="@drawable/myradiobutton"
             android:textSize="20sp"
             android:text="@string/c2"/>
+        <RadioButton
+            android:id="@+id/RadioButton05"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/myradiobutton"
+            android:text="@string/c5"/>
+        <RadioButton
+            android:id="@+id/RadioButton04"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/myradiobutton"
+            android:text="@string/c4"/>
         <RadioButton
             android:id="@+id/RadioButton03"
             android:textSize="20sp"

@@ -3,6 +3,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -27,11 +28,16 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +46,7 @@ import java.util.Objects;
 
 import static android.R.id.list;
 import static android.app.Activity.RESULT_OK;
+import static android.content.ComponentCallbacks2.TRIM_MEMORY_BACKGROUND;
 import static android.support.constraint.R.id.parent;
 
 /**
@@ -171,11 +178,11 @@ public class MyFragment2 extends Fragment implements RadioGroup.OnCheckedChangeL
                 //initData();
                 //String[] from={"img","text"};
                 //int[] to={R.id.img,R.id.text};
-                int icno[] = { R.mipmap.k1, R.mipmap.k2, R.mipmap.k3,
-                        R.mipmap.k4, R.mipmap.k5, R.mipmap.k6, R.mipmap.k7,
+                final int icno[] = {  R.mipmap.k2, R.mipmap.k3,
+                        R.mipmap.k4, R.mipmap.k6,
                         R.mipmap.k8, R.mipmap.k9, R.mipmap.k10, R.mipmap.k11, R.mipmap.k12 };
                 //图标下的文字
-                String name[]={"苹果","五星","树叶","松鼠","图标 ","小猫","熊猫","蝴蝶","海豚","小狗","枫叶","游鱼"};
+                String name[]={"五星","树叶","松鼠","小猫","蝴蝶","海豚","小狗","枫叶","游鱼"};
                 //SimpleAdapter adapter=new SimpleAdapter(getActivity(), dataList, R.layout.gridview, from, to);
                 ReAdapter adapter=new ReAdapter(getActivity(),R.layout.gridview,name,icno);
                 gridView.setAdapter(adapter);
@@ -191,6 +198,17 @@ public class MyFragment2 extends Fragment implements RadioGroup.OnCheckedChangeL
                             View v=arg0.getChildAt(i);
                             if (arg2 == i) {//当前选中的Item改变背景颜色
                                 arg1.setBackgroundResource(R.color.toolbarcol);
+
+                                OpenFileDialog.etn[2] = true;
+
+                                MainActivity.i=i;
+
+                                if(!OpenFileDialog.etn[1])
+                                {
+                                    Log.i("etn1=false","");
+                                    Toast.makeText(getContext(),"select document",Toast.LENGTH_SHORT).show();
+                                }
+
                             } else {
                                 v.setBackgroundResource(R.color.transparent);
                             }

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.my.tab.MainActivity.flag;
-
 public class OpenFileDialog {
     public static String tag = "OpenFileDialog";
     static Bundle bundle = new Bundle();
@@ -33,10 +32,10 @@ public class OpenFileDialog {
 
 
 
-
-
     public static String [] str = new String[2];
-    public static boolean [] etn = new boolean[2];
+    public static boolean [] etn = new boolean[3];
+    public static String json;
+
 
     // 参数说明
     // context:上下文
@@ -235,50 +234,50 @@ public class OpenFileDialog {
                 {str[id] = bundle.getString("path");
                     etn[id] = true;
                     OpenFileDialog.bundle.clear();}
-//                View it=MainActivity.toolbar.findViewById(R.id.action_settings);
-//                it.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        flag=1;
-//                        Toast.makeText(context, "点了按钮！", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-                if(etn[0] && etn [1]){
-                    Toast.makeText(context, "都存在！", Toast.LENGTH_SHORT).show();
+
+
+
+                if(etn[0]&&etn[1] ){//选择本地图片
+                    Toast.makeText(context, "选择了本地图片和文档,点击右上角按钮生成图片", Toast.LENGTH_SHORT).show();
                     File file3 = new File(str[0]);
                     File file4 = new File(str[1]);
                     File file5 ;
+                    file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+                    if(file5.exists())file5.delete();
 
                     try {
-                        file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
-                        if(file5.exists())file5.delete();
-                        POST.postAsynFile(Json.jsoncreate(file3,file4));
-                        while(!file5.exists());
-                        MainActivity.viewPager.setCurrentItem(4);
-//
-//                        int i = 10000;
-//                        boolean x = true;
-//                        while(x){
-//                            i=i-1;
-//                            if(i==0)x=false;
-//                        };
-//                        Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/wordcloud/wordcloud.jpg");
-//                        MainActivity.imv.setImageBitmap(bitmap);
-
-                        //file5.delete();
-
-                        Toast.makeText(context, "传送成功啦", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
-
-
+                        json = Json.jsoncreate(file3,file4);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Toast.makeText(context,"传送失败啦",Toast.LENGTH_SHORT).show();
+                        json = "";
                     }
-
-                    etn[0]=false;etn[1]=false;
-                    flag=0;
+                    Log.i("json",json);
                 }
+
+                if(etn[0]&&MainActivity.textflag || etn[0]&&MainActivity.soundflag){
+                    File file3 = new File(str[0]);
+                    File file5 ;
+                    file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+                    if(file5.exists())file5.delete();
+
+                    if(MainActivity.textflag){
+                    try{
+                        json = Json.jsoncreatetext(file3,MainActivity.text);
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                        json = "";
+                    }}
+                    if(MainActivity.soundflag){
+                        try{
+                            json = Json.jsoncreatetext(file3,MainActivity.soundtext);
+                        }catch (IOException e) {
+                            e.printStackTrace();
+                            json = "";
+                        }
+                    }
+                    Log.i("json",json);
+                }
+
 
 
 

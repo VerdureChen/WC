@@ -27,7 +27,7 @@
         app:pstsIndicatorHeight="5dp"
         app:pstsShouldExpand="true"
         app:pstsTabBackground="@color/transparent"
-        app:pstsTextAllCaps="false"
+
         app:pstsUnderlineHeight="0dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp"
@@ -41,5 +41,10 @@
         android:background="@drawable/bc11"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
-
+    <ProgressBar
+        android:id="@+id/proBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

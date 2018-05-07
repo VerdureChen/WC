@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Radio_dialog_items">
+        <item>白色</item>
+        <item>黑色</item>
+    </string-array>
+    <string-array name="Radio_dialog_items2">
+    <item>华文彩云</item>
+    <item>华文楷体</item>
+    <item>华康少女体</item>
+        <item>华文行楷</item>
+        <item>华康雅宋体</item>
+        <item>华文中宋</item>
+        <item>繁体</item>
+</string-array>
+
+</resources>

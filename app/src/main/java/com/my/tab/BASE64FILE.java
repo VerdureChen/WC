@@ -3,9 +3,13 @@ package com.my.tab;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
 import Decoder.BASE64Decoder;
 import Decoder.BASE64Encoder;
@@ -26,7 +30,20 @@ public class BASE64FILE {
 
         return new BASE64Encoder().encodeBuffer(buffer);
     }
-
+    public static String readtxtFile(String path) throws Exception {
+        File file = new File(path);
+        FileInputStream inputFile = new FileInputStream(file);
+        InputStreamReader inp =new InputStreamReader(inputFile,"GBK");
+        BufferedReader reader = new BufferedReader(inp);
+        String line;
+        String fileContent = "";
+        while((line = reader.readLine())!= null){
+            fileContent += line;
+        }
+        inp.close();
+        inputFile.close();
+        return fileContent;
+    }
     /**
      * 将base64字符解码保存文件
      * @param base64Code

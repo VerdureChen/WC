@@ -2,14 +2,17 @@ package com.my.tab;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +50,15 @@ public class MyFragment5 extends Fragment {
         File file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
         ImageView imv = (ImageView)getActivity().findViewById(R.id.imagefinal) ;
         if(!file5.exists()){
-            imv.setImageResource(R.drawable.bc5);
-        }
-
+            Resources resources = getContext().getResources();
+            Drawable drawable = resources.getDrawable(R.drawable.bc5);
+            imv.setImageDrawable(drawable);
+            Log.i("","exist?");
+        }else{
         final Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/wordcloud/wordcloud.jpg");
 
         imv.setImageBitmap(bitmap);
+
         LinearLayout rootLayout = (LinearLayout)getActivity().findViewById(R.id.fragmentContainer03);
         rootLayout.removeAllViews();
         Button button = new Button(getActivity());
@@ -66,9 +72,11 @@ public class MyFragment5 extends Fragment {
             @Override
             public void onClick(View v) {
                 saveImageToGallery(getContext(),bitmap);
+                File file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+                file5.delete();
             }
         });
-        rootLayout.addView(button,button_parent_params);}
+        rootLayout.addView(button,button_parent_params);}}
 
 
 

@@ -66,7 +66,7 @@ public class POST {
                     resp = resp.replaceAll("pic_b64:","");
                     Log.i("dix"+dix,resp);
                     try {
-                        File dict = new File("/storage/wordcloud");
+                        File dict = new File("/storage/emulated/0/wordcloud");
                         if(!(dict.exists()))dict.mkdir();
                         else Log.i("wordcloud 文件夹已存在?","存在");
 
