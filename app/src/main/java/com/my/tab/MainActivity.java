@@ -65,13 +65,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     public static String text;
     public static int i;
     public static boolean [] flag = new boolean[3];
-    public static boolean textflag ;
+    public static boolean textflag,freflag;
     public static boolean soundflag;
     public static boolean login,register;
     public static String soundtext;
     public static String code ="";
     public static String message="";
-    public static String username,password;
+    public static String username,password,wordlist;
+    public static int number;
 
 
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
     static Map<String, Integer> images = new HashMap<String, Integer>();
     static Dialog dialog1;
-    static Dialog dialog2;
+    static Dialog dialog2,dialog6;
     static CallbackBundle callback = new CallbackBundle() {
         Bundle bundle = new Bundle();
 
@@ -129,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        wordlist = "";
 
         initPermission();
         asr = EventManagerFactory.create(this, "asr");
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         MyFragment2 myFragment2 = new MyFragment2();
         MyFragment3 myFragment3 = new MyFragment3();
         MyFragment4 myFragment4 = new MyFragment4();
-        MyFragment5 myFragment5 = new MyFragment5();
+        final MyFragment5 myFragment5 = new MyFragment5();
         fragments.add(myFragment0);
         fragments.add(myFragment);
         fragments.add(myFragment2);
@@ -174,20 +176,22 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                 File file5 ;
 
                 file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+                if(file5.exists())file5.delete();
                 if(soundflag){//选择输入语音
                     if(OpenFileDialog.etn[0]){//选择本地图片
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
-                        flag[0]=false;flag[1]=false;flag[2]=false;
                         if(file5.exists())file5.delete();
+
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
+
                         while(!file5.exists());
                         MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
-
-                        OpenFileDialog.etn[0]=false;OpenFileDialog.etn[1]=false;OpenFileDialog.etn[2]=false;textflag=false;soundflag=false;
+                         OpenFileDialog.etn[1]=false;OpenFileDialog.etn[2]=false;
+//                        soundflag=false;
 
                     }
                     if(OpenFileDialog.etn[2]){
@@ -195,18 +199,19 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         OpenFileDialog.json = Json.jsoncreatemubantext(i,soundtext);
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
-                        flag[0]=false;flag[1]=false;flag[2]=false;
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
-                        Log.i("run?","run");
                         while(!file5.exists());
                         MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
                         OpenFileDialog.etn[1]=false;
-                        OpenFileDialog.etn[2]=false;
-                        soundflag=false;
+//                        OpenFileDialog.etn[2]=false;
 
                     }
+                    textflag = false;
+//                    soundflag = false;
+
+
                 }
 
 
@@ -216,7 +221,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
-                        flag[0]=false;flag[1]=false;flag[2]=false;
+                        setfre(freflag);
+//                        flag[0]=false;flag[1]=false;flag[2]=false;
                         if(file5.exists())file5.delete();
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
@@ -225,7 +231,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
 
-                        OpenFileDialog.etn[0]=false;OpenFileDialog.etn[1]=false;OpenFileDialog.etn[2]=false;textflag=false;
+//                        OpenFileDialog.etn[0]=false;
+                        OpenFileDialog.etn[1]=false;
+                        OpenFileDialog.etn[2]=false;
 
                     }
                     if(OpenFileDialog.etn[2]){
@@ -233,7 +241,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                             OpenFileDialog.json = Json.jsoncreatemubantext(i,text);
                             SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
-                            flag[0]=false;flag[1]=false;flag[2]=false;
+//                            flag[0]=false;flag[1]=false;flag[2]=false;
+                        setfre(freflag);
                             Log.i("json",OpenFileDialog.json);
                             POST.postAsynFile(OpenFileDialog.json);
                             Log.i("run?","run");
@@ -241,12 +250,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                             MainActivity.viewPager.setCurrentItem(5);
                             Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
                             OpenFileDialog.etn[1]=false;
-                            OpenFileDialog.etn[2]=false;
-                            textflag=false;
+                            OpenFileDialog.etn[0]=false;
+//                            OpenFileDialog.etn[2]=false;
+//                            textflag=false;
+
 
                     }
 
-
+                    soundflag = false;
                 }
 
                 if(OpenFileDialog.etn[0] && OpenFileDialog.etn[1] )
@@ -254,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
                     SET(flag[0],flag[1],flag[2]);
                     setlogin(login);
-                    flag[0]=false;flag[1]=false;flag[2]=false;
+//                    flag[0]=false;flag[1]=false;flag[2]=false;
 
                         if(file5.exists())file5.delete();
                     Log.i("json",OpenFileDialog.json);
@@ -264,7 +275,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
 
-                    OpenFileDialog.etn[0]=false;OpenFileDialog.etn[1]=false;OpenFileDialog.etn[2]=false;textflag=false;
+//                    OpenFileDialog.etn[0]=false;OpenFileDialog.etn[1]=false;
+                    OpenFileDialog.etn[2]=false;textflag=false;soundflag =false;
                 }
 
                 if(OpenFileDialog.etn[2] && OpenFileDialog.etn[1] ){
@@ -276,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         OpenFileDialog.json = Json.jsoncreatemuban(i,filedoc);
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
-                        flag[0]=false;flag[1]=false;flag[2]=false;
+//                        flag[0]=false;flag[1]=false;flag[2]=false;
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         Log.i("run?","run");
@@ -290,6 +302,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
                     OpenFileDialog.etn[1]=false;
                     OpenFileDialog.etn[2]=false;
+                    OpenFileDialog.etn[0]=false;
+                    soundflag = false;
                     textflag=false;
                 }
 
@@ -435,7 +449,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         dialog1 = OpenFileDialog.createDialog(0, this, "选择图片文件", callback,
                 ".bmp;.jpg;.png;.gif;",images);
-        dialog2 = OpenFileDialog.createDialog(1, this, "选择WORD文件", callback, ".txt;.doc;.docx;", images);
+        dialog2 = OpenFileDialog.createDialog(1, this, "选择WORD文件", callback, ".doc;.docx;", images);
+        dialog6 = OpenFileDialog.createDialog(1, this, "选择txt文件", callback, ".txt;",
+                images);
 
         //MainActivity.imv = (ImageView)findViewById(R.id.imagefinal);
 
@@ -531,9 +547,16 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         }
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            // super.destroyItem(container, position, object);
-            Fragment fragment = fragments.get(position);
-            fm.beginTransaction().hide(fragment).commit();
+            //
+            if(position!=5&&position!=4)
+            { Fragment fragment = fragments.get(position);
+            fm.beginTransaction().hide(fragment).commit();}
+            else{
+                super.destroyItem(container, position, object);
+                Log.i("wwwwwww", "getItem");
+                if(position==4) Log.i("44444", "getItem");
+            }
+
         }
     }
 
@@ -670,6 +693,29 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"username\":\""+username+"\"}");
         }
     }
+    public void setfre(boolean freflag){
+        if(freflag){
+            if(OpenFileDialog.json.indexOf("changelist")<0)
+                OpenFileDialog.json = OpenFileDialog.json.replace("}","," +
+                        "\"changelist\":\"{");
+            else OpenFileDialog.json = OpenFileDialog.json.substring(0,OpenFileDialog.json.indexOf
+                    ("changelist\":\"{"));
+            int j =0;
+            while(number>0){
+                number--;
+                OpenFileDialog.json = OpenFileDialog.json+"\""+MyFragment4.data.get(j)
+                        +"\":\""+MyFragment4.data2.get(j)
+                        +"\",";
+                Log.i("j",j+"");
+                j++;
+            }
+            OpenFileDialog.json = OpenFileDialog.json.substring(0,OpenFileDialog.json.length()-1)
+                    +"}\"}";
+            Log.i("setfre",OpenFileDialog.json.substring(OpenFileDialog.json.indexOf("changelist")));
+
+        }
+    }
+
     private void SET(boolean flag0,boolean flag1,boolean flag2){
         if(flag0){
             if(background.equals("白色"));

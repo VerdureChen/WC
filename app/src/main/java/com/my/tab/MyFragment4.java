@@ -23,6 +23,7 @@ import com.my.tab.MyAdapter.Callback;
 
 import static android.R.attr.data;
 import static com.my.tab.MainActivity.i;
+import static com.my.tab.MainActivity.wordlist;
 import static com.my.tab.R.id.mbtn1;
 //import static com.my.tab.R.id.mbtn1;
 //import static com.my.tab.R.id.mtv2;
@@ -34,8 +35,8 @@ import static com.my.tab.R.id.mbtn1;
 public class MyFragment4 extends Fragment implements Callback{
 
     static int position;
-    final List<String> data = new ArrayList<>();
-    final List<Integer> data2 = new ArrayList<>();
+    static final List<String> data = new ArrayList<>();
+    static final List<Integer> data2 = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v=inflater.inflate(R.layout.fragment_detail4,container,false);
@@ -46,15 +47,41 @@ public class MyFragment4 extends Fragment implements Callback{
         super.onActivityCreated(savedInstanceState);
         final ListView mList = (ListView) getActivity().findViewById(R.id.mList);
 
-        for(int i = 0; i < 20; i ++){
-            data.add("词语" + i);
-        }
+        int dix3 = MainActivity.wordlist.indexOf(":");
+        MainActivity.number = 0;
+        String word;
+        int frequence;
+        data.add("无词语");
+        data2.add(1);
+        while(dix3>=0){
+            word = MainActivity.wordlist.substring(0,dix3);
+            Log.i("word",word);
+            if(MainActivity.number==0)data.set(0,word);
+            else data.add(word);
+            MainActivity.wordlist = MainActivity.wordlist.substring(dix3+1);
+            Log.i("wordlist",MainActivity.wordlist);
+            int dix4 = MainActivity.wordlist.indexOf(",");
+            if(dix4>=0)
+            {
+                frequence = Integer.parseInt(MainActivity.wordlist.substring(0,dix4));
+                MainActivity.wordlist = MainActivity.wordlist.substring(dix4+1);
+            }
+            else frequence = Integer.parseInt(MainActivity.wordlist);
+            if(MainActivity.number==0)data2.set(0,frequence);
+            else
+                data2.add(frequence) ;
 
-
-        Random ran=new Random();
-        for(int i = 0; i < 20; i ++){
-            data2.add((ran.nextInt()%20+20)%20);
+            dix3 = MainActivity.wordlist.indexOf(":");
+            MainActivity.number++;
         }
+//        for(i = 0; i < 20; i ++){
+//            data.add("词语" + i);
+//        }
+//
+//        Random ran=new Random();
+//        for(i = 0; i < 20; i ++){
+//            data2.add((ran.nextInt()%20+20)%20);
+//        }
         MyAdapter adapter = new MyAdapter(data,data2,this);
 
 
@@ -91,7 +118,7 @@ public class MyFragment4 extends Fragment implements Callback{
                 Log.d("tag", "Btn_onClick: " + "view = " + v+v.getTag());
                 Toast.makeText(getActivity(),"上调",Toast.LENGTH_SHORT).show();
                 data2.set(index,data2.get(index)+1);
-
+                MainActivity.freflag = true;
                 ///mtv2.setText(data2.get(i).toString());
                 break;
             case R.id.mbtn2:
@@ -101,7 +128,7 @@ public class MyFragment4 extends Fragment implements Callback{
                 Toast.makeText(getActivity(),"下调",Toast.LENGTH_SHORT).show();
                 if(data2.get(index2)-1!=0)
                     data2.set(index2,data2.get(index2)-1);
-
+                MainActivity.freflag = true;
                 // view.mtv2.setText(data2.get(i).toString());
                 break;
             case R.id.mtv:
@@ -111,4 +138,8 @@ public class MyFragment4 extends Fragment implements Callback{
                 Toast.makeText(getActivity(),data.get(index3), Toast.LENGTH_SHORT).show();
                 break;
         }
-}}
+}
+
+
+
+}

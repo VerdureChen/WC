@@ -238,7 +238,7 @@ public class OpenFileDialog {
                     OpenFileDialog.bundle.clear();}
 
 
-
+//0图片1文本2模板
                 if(etn[0]&&etn[1] ){//选择本地图片
                     Toast.makeText(context, "选择了本地图片和文档,点击右上角按钮生成图片", Toast.LENGTH_SHORT).show();
                     File file3 = new File(str[0]);

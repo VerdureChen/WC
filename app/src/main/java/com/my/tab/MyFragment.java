@@ -92,7 +92,7 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
                 button.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        MainActivity.dialog2.show();
+                        MainActivity.dialog6.show();
                     }
                 });
                 break;

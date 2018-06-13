@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.utils.L;
 
+import java.io.File;
+
 import static android.view.View.MEASURED_HEIGHT_STATE_SHIFT;
 import static android.view.View.inflate;
 
@@ -194,10 +196,25 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
 //                                .LayoutParams
 //                                (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 //                        rootLayout.addView(text1, textview1_parent_params8);
-//                        button.setText(R.string.find);
-//                        rootLayout.addView(button, button_parent_params);
 
-//                        POST.postAsynretrive("{\"username\":\"nzx\"}");
+                        if(MainActivity.login) {
+                            button.setText(R.string.find);
+                            button.setOnClickListener(new View.OnClickListener() {
+                                File file5 ;
+
+                                @Override
+                                public void onClick(View v) {
+                                    file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+                                    if(file5.exists())file5.delete();
+                                    POST.postAsynretrive("{\"username\":\"" + MainActivity
+                                            .username + "\"}");
+                                    while(!file5.exists());
+                                    MainActivity.viewPager.setCurrentItem(5);
+                                }
+                            });
+                            rootLayout.addView(button, button_parent_params);
+                        }
+
                         }
 
 
