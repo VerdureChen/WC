@@ -48,13 +48,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/myradiobutton"
             android:text="@string/c4"/>
-        <RadioButton
-            android:id="@+id/RadioButton03"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/myradiobutton"
-            android:text="@string/c3"/>
+
     </RadioGroup>
     <LinearLayout
         android:id="@+id/fragmentContainer01"

@@ -52,6 +52,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static android.R.id.list;
 import static android.support.v7.appcompat.R.styleable.MenuItem;
 import static java.security.AccessController.getContext;
 
@@ -66,14 +67,18 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     public static boolean [] flag = new boolean[3];
     public static boolean textflag ;
     public static boolean soundflag;
+    public static boolean login,register;
     public static String soundtext;
+    public static String code ="";
+    public static String message="";
+    public static String username,password;
 
 
 
     PagerSlidingTabStrip pst;
     static  ViewPager viewPager;
     ArrayList<Fragment> fragments;
-    String[] titles = {"文本", "模板", "参数","词表","词云"};
+    String[] titles = {"用户","文本", "模板", "参数","词表","词云"};
     static Toolbar toolbar;
     static  AlertDialog dialog3;
     static  AlertDialog dialog4;
@@ -136,10 +141,12 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         viewPager = (ViewPager) findViewById(R.id.pager);
         fragments = new ArrayList<>();
         MyFragment myFragment = new MyFragment();
+        MyFragment0 myFragment0 = new MyFragment0();
         MyFragment2 myFragment2 = new MyFragment2();
         MyFragment3 myFragment3 = new MyFragment3();
         MyFragment4 myFragment4 = new MyFragment4();
         MyFragment5 myFragment5 = new MyFragment5();
+        fragments.add(myFragment0);
         fragments.add(myFragment);
         fragments.add(myFragment2);
         fragments.add(myFragment3);
@@ -149,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         viewPager.setAdapter(new MyPagerAdapter(fragmentManager, titles, fragments));
         setPagerSliding(pst);
         viewPager.setCurrentItem(0);
+
         //当ViewPager的onPagerChangeListener回调时，PagerSlidingTabStrip也一起随之变动
         //具体做法都已封装到了PagerSlidingTabStrip.setViewPager()方法里，使用时调用实例如下
         flag[0]= false;
@@ -169,12 +177,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                 if(soundflag){//选择输入语音
                     if(OpenFileDialog.etn[0]){//选择本地图片
                         SET(flag[0],flag[1],flag[2]);
+                        setlogin(login);
                         flag[0]=false;flag[1]=false;flag[2]=false;
                         if(file5.exists())file5.delete();
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         while(!file5.exists());
-                        MainActivity.viewPager.setCurrentItem(4);
+                        MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
 
@@ -185,12 +194,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         if(file5.exists())file5.delete();
                         OpenFileDialog.json = Json.jsoncreatemubantext(i,soundtext);
                         SET(flag[0],flag[1],flag[2]);
+                        setlogin(login);
                         flag[0]=false;flag[1]=false;flag[2]=false;
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         Log.i("run?","run");
                         while(!file5.exists());
-                        MainActivity.viewPager.setCurrentItem(4);
+                        MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
                         OpenFileDialog.etn[1]=false;
                         OpenFileDialog.etn[2]=false;
@@ -205,12 +215,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     if(OpenFileDialog.etn[0]){//选择本地图片
 
                         SET(flag[0],flag[1],flag[2]);
+                        setlogin(login);
                         flag[0]=false;flag[1]=false;flag[2]=false;
                         if(file5.exists())file5.delete();
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         while(!file5.exists());
-                        MainActivity.viewPager.setCurrentItem(4);
+                        MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
 
@@ -221,12 +232,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                             if(file5.exists())file5.delete();
                             OpenFileDialog.json = Json.jsoncreatemubantext(i,text);
                             SET(flag[0],flag[1],flag[2]);
+                        setlogin(login);
                             flag[0]=false;flag[1]=false;flag[2]=false;
                             Log.i("json",OpenFileDialog.json);
                             POST.postAsynFile(OpenFileDialog.json);
                             Log.i("run?","run");
                             while(!file5.exists());
-                            MainActivity.viewPager.setCurrentItem(4);
+                            MainActivity.viewPager.setCurrentItem(5);
                             Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
                             OpenFileDialog.etn[1]=false;
                             OpenFileDialog.etn[2]=false;
@@ -241,13 +253,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                 {
 
                     SET(flag[0],flag[1],flag[2]);
+                    setlogin(login);
                     flag[0]=false;flag[1]=false;flag[2]=false;
 
                         if(file5.exists())file5.delete();
                     Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         while(!file5.exists());
-                        MainActivity.viewPager.setCurrentItem(4);
+                        MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
 
@@ -262,12 +275,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         if(file5.exists())file5.delete();
                         OpenFileDialog.json = Json.jsoncreatemuban(i,filedoc);
                         SET(flag[0],flag[1],flag[2]);
+                        setlogin(login);
                         flag[0]=false;flag[1]=false;flag[2]=false;
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         Log.i("run?","run");
                         while(!file5.exists());
-                        MainActivity.viewPager.setCurrentItem(4);
+                        MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
                     } catch (IOException e) {
@@ -302,7 +316,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         if(background ==null)background = "白色";
                         flag[0] = true;
                         Toast.makeText(MainActivity.this,background,Toast.LENGTH_SHORT).show();
@@ -363,7 +376,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         flag[1] = true;
-                        Toast.makeText(MainActivity.this,"选中"+colorm,Toast.LENGTH_SHORT).show();
+                        if(colorm ==null)flag[1]=false;
+                        else{
+                        Toast.makeText(MainActivity.this,"选中"+colorm,Toast.LENGTH_SHORT).show();}
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -392,6 +407,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         flag[2] = true;
+                        if(Fonts ==null)Fonts = "华文中宋";
                         Toast.makeText(MainActivity.this,"选中"+Fonts,Toast.LENGTH_SHORT).show();
                    }
                 })
@@ -463,8 +479,10 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     public void setPagerSliding(PagerSlidingTabStrip p) {
         p.setViewPager(viewPager);
         p.setTextSize(50);
+        p.setTextColorResource(R.color.gray1);
         p.setDividerWidth(0);
         p.setDividerPadding(20);
+
     }
 
 
@@ -475,11 +493,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     public class MyPagerAdapter extends FragmentPagerAdapter {
         private String[] titles;
         ArrayList<Fragment> fragments;
-
+        public FragmentManager fm;
         public MyPagerAdapter(FragmentManager fm, String[] titles, ArrayList<Fragment> fragments) {
             super(fm);
+            this.fm=fm;
             this.titles = titles;
             this.fragments = fragments;
+
         }
 
 
@@ -490,12 +510,30 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         @Override
         public Fragment getItem(int position) {
-            return fragments.get(position);
+            Fragment fragment = null;
+            Log.i("sssssssssssss", "getItem");
+            fragment = fragments.get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", "" + position);
+            fragment.setArguments(bundle);
+            return fragment;
         }
-
+        @Override
+        public Fragment instantiateItem(ViewGroup container, int position) {
+            Fragment fragment = (Fragment) super.instantiateItem(container,
+                    position);
+            fm.beginTransaction().show(fragment).commit();
+            return fragment;
+        }
         @Override
         public int getCount() {
             return fragments.size();
+        }
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            // super.destroyItem(container, position, object);
+            Fragment fragment = fragments.get(position);
+            fm.beginTransaction().hide(fragment).commit();
         }
     }
 
@@ -627,6 +665,11 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
     }
 
+    private void setlogin(boolean login){
+        if(login){
+            OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"username\":\""+username+"\"}");
+        }
+    }
     private void SET(boolean flag0,boolean flag1,boolean flag2){
         if(flag0){
             if(background.equals("白色"));
@@ -638,11 +681,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         }
         if(flag1){
             OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"colormap\":\""+colorm+"\"}");
-
             Log.i("testflag2","true");
         }
         if(flag2){
-            //OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"colormap\":\""+colorm+"\"}");
             if(Fonts.equals("华文彩云"))OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"font\":\"caiyun\"}");
             if(Fonts.equals("华文楷体"))OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"font\":\"kaiti\"}");
             if(Fonts.equals("华康少女体"))OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"font\":\"shaonv\"}");
@@ -650,9 +691,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             if(Fonts.equals("华康雅宋体"))OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"font\":\"yasong\"}");
             if(Fonts.equals("华文中宋"))OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"font\":\"zhongsong\"}");
             if(Fonts.equals("繁体"))OpenFileDialog.json = OpenFileDialog.json.replace("}",",\"font\":\"fan\"}");
-
-
-
 
             Log.i("testflag3","true");
         }

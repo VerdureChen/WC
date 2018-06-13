@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +25,8 @@ import java.util.Map;
 public class OpenFileDialog {
     public static String tag = "OpenFileDialog";
     static Bundle bundle = new Bundle();
-    static final public String sRoot = "/";
+    static final public String sRoot = Environment.getRootDirectory().toString();//获取手机根目录
+
     static final public String sParent = "..";
     static final public String sFolder = ".";
     static final public String sEmpty = "";

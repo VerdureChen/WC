@@ -63,9 +63,6 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
             case R.id.RadioButton02:
                 changeButton(02);
                 break;
-            case R.id.RadioButton03:
-                changeButton(03);
-                break;
             case R.id.RadioButton04:
                 changeButton(04);
                 break;
@@ -84,7 +81,7 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
     public void changeButton(int i){
         LinearLayout rootLayout = (LinearLayout)getActivity().findViewById(R.id.fragmentContainer01);
         rootLayout.removeAllViews();
-        Button button = new Button(getActivity());
+        final Button button = new Button(getActivity());
         final ToggleButton button4=new ToggleButton(getActivity());
         //button.setTextColor(getResources().getColor(R.color.gray1));
         button.setBackgroundResource(R.drawable.mybutton);
@@ -108,12 +105,7 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
                     }
                 });
                 break;
-            case 03:
-                EditText ed= new EditText(getActivity());
-                button.setText(R.string.p13);
-                LinearLayout.LayoutParams edit_parent_params= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                rootLayout.addView(ed,edit_parent_params);
-                break;
+
             case 04:
                 final EditText ed1= new EditText(getActivity());
                 ed1.setMaxLines(3);
@@ -128,7 +120,13 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
                         MainActivity.textflag = true;
                         OpenFileDialog.etn[1]= false;
                         MainActivity.text =ed1.getText().toString();
-
+                        if(button.getText().equals("点击确认"))
+                        {ed1.setEnabled(false);
+                         button.setText("点击修改");
+                        }
+                        else {ed1.setEnabled(true);
+                            button.setText("点击确认");
+                        }
                         Log.i("text",MainActivity.text);
                     }
                 });

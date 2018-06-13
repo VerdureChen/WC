@@ -22,6 +22,12 @@ public class Json {
         }
     }
 
+    public static String jsonuserdata(String username,String password){
+        String json;
+        json = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+        return json;
+    }
+
     public static String jsoncreate(File img, File document) throws IOException {
         String suffix = getSuffix(img.getName());
         String suffix1 = getSuffix(document.getName());
@@ -53,15 +59,11 @@ public class Json {
             else {documentdata = BASE64FILE.readtxtFile(docupath);
                 Log.i("txt=",documentdata);
             }
-
-
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.w("解码BASE64异常啦", "jsoncreate");
             return "解码BASE64异常啦！";
         }
-
-
 //        JSONObject jsonObject = new JSONObject();
 //        try {
 //            jsonObject.put("photo", imgdata);
@@ -75,14 +77,7 @@ public class Json {
         else{
             json = "{\"type\":\""+type+"\",\"photo\":\""+imgdata+"\",\"txt\":\""+documentdata+"\"}";
         }
-
-
-
-
         return json;
-
-
-
     }
 
     public static String jsoncreatemuban(int i,File document)throws IOException{
@@ -248,5 +243,7 @@ public class Json {
 
         return json;
     }
+
+
 
 }
