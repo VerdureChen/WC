@@ -23,6 +23,7 @@ import com.my.tab.MyAdapter.Callback;
 
 import static android.R.attr.data;
 import static com.my.tab.MainActivity.i;
+import static com.my.tab.MainActivity.viewPager;
 import static com.my.tab.MainActivity.wordlist;
 import static com.my.tab.R.id.mbtn1;
 //import static com.my.tab.R.id.mbtn1;
@@ -44,15 +45,21 @@ public class MyFragment4 extends Fragment implements Callback{
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final ListView mList = (ListView) getActivity().findViewById(R.id.mList);
 
+        super.onActivityCreated(savedInstanceState);
+
+        final ListView mList = (ListView) getActivity().findViewById(R.id.mList);
+//        data.clear();
+//        data2.clear();
         int dix3 = MainActivity.wordlist.indexOf(":");
         MainActivity.number = 0;
         String word;
         int frequence;
+        if(data2.size()==0){
+
         data.add("无词语");
         data2.add(1);
+        }
         while(dix3>=0){
             word = MainActivity.wordlist.substring(0,dix3);
             Log.i("word",word);

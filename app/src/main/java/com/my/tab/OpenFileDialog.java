@@ -25,7 +25,8 @@ import java.util.Map;
 public class OpenFileDialog {
     public static String tag = "OpenFileDialog";
     static Bundle bundle = new Bundle();
-    static final public String sRoot = Environment.getRootDirectory().toString();//获取手机根目录
+    static final public String sRoot = "/";
+            //Environment.getRootDirectory().toString();//获取手机根目录
 
     static final public String sParent = "..";
     static final public String sFolder = ".";

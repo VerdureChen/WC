@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
                         if(file5.exists())file5.delete();
-
+                        setfre(freflag);
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
 
@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         OpenFileDialog.json = Json.jsoncreatemubantext(i,soundtext);
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
+                        setfre(freflag);
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         while(!file5.exists());
@@ -266,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     SET(flag[0],flag[1],flag[2]);
                     setlogin(login);
 //                    flag[0]=false;flag[1]=false;flag[2]=false;
-
+                    setfre(freflag);
                         if(file5.exists())file5.delete();
                     Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
@@ -288,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         OpenFileDialog.json = Json.jsoncreatemuban(i,filedoc);
                         SET(flag[0],flag[1],flag[2]);
                         setlogin(login);
+                        setfre(freflag);
 //                        flag[0]=false;flag[1]=false;flag[2]=false;
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
@@ -306,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     soundflag = false;
                     textflag=false;
                 }
-
+                freflag = false;
 
                 pro1.setVisibility(ProgressBar.GONE);
 
@@ -704,8 +706,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             while(number>0){
                 number--;
                 OpenFileDialog.json = OpenFileDialog.json+"\""+MyFragment4.data.get(j)
-                        +"\":\""+MyFragment4.data2.get(j)
-                        +"\",";
+                        +"\":"+MyFragment4.data2.get(j)
+                        +",";
                 Log.i("j",j+"");
                 j++;
             }
@@ -714,6 +716,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             Log.i("setfre",OpenFileDialog.json.substring(OpenFileDialog.json.indexOf("changelist")));
 
         }
+        MyFragment4.data.clear();
+        MyFragment4.data2.clear();
     }
 
     private void SET(boolean flag0,boolean flag1,boolean flag2){
