@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.utils.L;
 
@@ -103,7 +104,7 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                 layout.setLayoutParams(li);
                 rootLayout.addView(layout);
                // View vv=View.inflate(getActivity(),R.layout.seekb1,null);
-                SeekBar sekbar= (SeekBar) getActivity().findViewById(R.id.sb_progress22);
+                final SeekBar sekbar= (SeekBar) getActivity().findViewById(R.id.sb_progress22);
                 final TextView tv = (TextView) getActivity().findViewById(R.id.tv22);
                 sekbar.setOnSeekBarChangeListener(new SeekBar
                         .OnSeekBarChangeListener() {
@@ -157,6 +158,10 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                         //登陆
                         //
                         //
+                        if(etext1.getText()==null||etext1.getText().length()<=0||etext2.getText()
+                                ==null||etext2.getText().length()<=0||sekbar.getProgress()!=100)
+                            Toast.makeText(getActivity(),"完善信息并进行验证！",Toast.LENGTH_SHORT).show();
+                        else{
                         MainActivity.username = etext1.getText().toString();
                         MainActivity.password = etext2.getText().toString();
                         POST.postAsynlogin(Json.jsonuserdata(MainActivity.username,MainActivity.password));
@@ -215,7 +220,7 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                             rootLayout.addView(button, button_parent_params);
                         }
 
-                        }
+                        }}
 
 
                 });
@@ -254,7 +259,7 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                 layout11.setLayoutParams(li11);
                 rootLayout.addView(layout11);
                 // View vv=View.inflate(getActivity(),R.layout.seekb1,null);
-                SeekBar sekbar1= (SeekBar) getActivity().findViewById(R.id.sb_progress22);
+                final  SeekBar sekbar1= (SeekBar) getActivity().findViewById(R.id.sb_progress22);
                 final TextView tv1 = (TextView) getActivity().findViewById(R.id.tv22);
                 sekbar1.setOnSeekBarChangeListener(new SeekBar
                         .OnSeekBarChangeListener() {
@@ -306,6 +311,10 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                     @Override
                     public void onClick(View v) {
                         //注册
+                        if(etext11.getText()==null||etext11.getText().length()<=0||etext22.getText()
+                                ==null||etext22.getText().length()<=0||sekbar1.getProgress()!=100)
+                            Toast.makeText(getActivity(),"完善信息并进行验证！",Toast.LENGTH_SHORT).show();
+                        else {
                         MainActivity.username = etext11.getText().toString();
                         MainActivity.password = etext22.getText().toString();
                         POST.postAsynregister(Json.jsonuserdata(MainActivity.username,MainActivity.password));
@@ -337,7 +346,7 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                             }
                         });
                         rootLayout.addView(button,button_parent_params);
-                    }
+                    }}
                 });
         }
     }

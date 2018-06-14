@@ -239,7 +239,12 @@ public class OpenFileDialog {
                     OpenFileDialog.bundle.clear();}
 
 
+                if(etn[1]=true){
+                    MainActivity.textflag =false;
+                    MainActivity.soundflag=false;
+                }
 //0图片1文本2模板
+
                 if(etn[0]&&etn[1] ){//选择本地图片
                     Toast.makeText(context, "选择了本地图片和文档,点击右上角按钮生成图片", Toast.LENGTH_SHORT).show();
                     File file3 = new File(str[0]);
@@ -258,6 +263,7 @@ public class OpenFileDialog {
                 }
 
                 if(etn[0]&&MainActivity.textflag || etn[0]&&MainActivity.soundflag){
+
                     File file3 = new File(str[0]);
                     File file5 ;
                     file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");

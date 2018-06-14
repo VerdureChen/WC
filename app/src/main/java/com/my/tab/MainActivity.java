@@ -172,7 +172,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             @Override
             public void onClick(View v) {
                 pro1.setVisibility(ProgressBar.VISIBLE);
-                Toast.makeText(getApplicationContext(), "点了按钮！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "请完善生成词云的文本或图片！", Toast.LENGTH_SHORT)
+                        .show();
                 File file5 ;
 
                 file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
@@ -277,7 +278,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
 
 //                    OpenFileDialog.etn[0]=false;OpenFileDialog.etn[1]=false;
-                    OpenFileDialog.etn[2]=false;textflag=false;soundflag =false;
+                    OpenFileDialog.etn[2]=false;
+                    textflag=false;soundflag =false;
                 }
 
                 if(OpenFileDialog.etn[2] && OpenFileDialog.etn[1] ){
@@ -298,13 +300,11 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
+                        OpenFileDialog.etn[0]=false;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
-                    OpenFileDialog.etn[1]=false;
-                    OpenFileDialog.etn[2]=false;
-                    OpenFileDialog.etn[0]=false;
                     soundflag = false;
                     textflag=false;
                 }
@@ -711,7 +711,11 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                 Log.i("j",j+"");
                 j++;
             }
-            OpenFileDialog.json = OpenFileDialog.json.substring(0,OpenFileDialog.json.length()-1)
+
+            if(j==0) OpenFileDialog.json = OpenFileDialog.json+"}\"}";
+                else OpenFileDialog.json = OpenFileDialog.json.substring(0,OpenFileDialog.json
+                    .length
+                    ()-1)
                     +"}\"}";
             Log.i("setfre",OpenFileDialog.json.substring(OpenFileDialog.json.indexOf("changelist")));
 
