@@ -248,6 +248,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                             Log.i("json",OpenFileDialog.json);
                             POST.postAsynFile(OpenFileDialog.json);
                             Log.i("run?","run");
+
+
                             while(!file5.exists());
                             MainActivity.viewPager.setCurrentItem(5);
                             Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
@@ -272,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         if(file5.exists())file5.delete();
                     Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
+
                         while(!file5.exists());
                         MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
@@ -296,7 +299,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                         Log.i("json",OpenFileDialog.json);
                         POST.postAsynFile(OpenFileDialog.json);
                         Log.i("run?","run");
+
                         while(!file5.exists());
+
                         MainActivity.viewPager.setCurrentItem(5);
                         Toast.makeText(getApplicationContext(), "图片生成！即将跳转！", Toast.LENGTH_SHORT).show();
 
@@ -700,13 +705,18 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             if(OpenFileDialog.json.indexOf("changelist")<0)
                 OpenFileDialog.json = OpenFileDialog.json.replace("}","," +
                         "\"changelist\":\"{");
-            else OpenFileDialog.json = OpenFileDialog.json.substring(0,OpenFileDialog.json.indexOf
+            else {OpenFileDialog.json = OpenFileDialog.json.substring(0,OpenFileDialog.json.indexOf
                     ("changelist\":\"{"));
+            Log.i("changelist is exist",OpenFileDialog.json.substring(OpenFileDialog.json.indexOf
+                    ("changelist")));
+            }
             int j =0;
-            while(number>0){
-                number--;
-                OpenFileDialog.json = OpenFileDialog.json+"\""+MyFragment4.data.get(j)
-                        +"\":"+MyFragment4.data2.get(j)
+            int number1 = number;
+            Log.i("number",number1+"");
+            while(number1>0){
+                number1--;
+                OpenFileDialog.json = OpenFileDialog.json+"'"+MyFragment4.data.get(j)
+                        +"':"+MyFragment4.data2.get(j)
                         +",";
                 Log.i("j",j+"");
                 j++;

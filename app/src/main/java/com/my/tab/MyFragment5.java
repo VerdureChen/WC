@@ -34,15 +34,52 @@ import static android.R.attr.path;
  */
 
 public class MyFragment5 extends Fragment {
-
+    View v;
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View v=inflater.inflate(R.layout.fragment_detail5,container,false);
+        v=inflater.inflate(R.layout.fragment_detail5,container,false);
 
 
         return v;
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser){
+
+        Log.d("TAG", " setUserVisibleHint() --> isVisibleToUser = " + isVisibleToUser);
+        if (isVisibleToUser&&v!=null) {
+            File file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+            ImageView imv = (ImageView)getActivity().findViewById(R.id.imagefinal) ;
+            if(!file5.exists()){
+                Resources resources = getContext().getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.bc5);
+                imv.setImageDrawable(drawable);
+                Log.i("","exist?");
+            }else{
+                final Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/wordcloud/wordcloud.jpg");
+
+                imv.setImageBitmap(bitmap);
+
+                LinearLayout rootLayout = (LinearLayout)getActivity().findViewById(R.id.fragmentContainer03);
+                rootLayout.removeAllViews();
+                Button button = new Button(getActivity());
+                button.setBackgroundResource(R.drawable.mybutton);
+                //button.setTextColor(getResources().getColor(R.color.gray1));
+                LinearLayout.LayoutParams button_parent_params= new LinearLayout.LayoutParams(LinearLayout.
+                        LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//                button.setText(R.string.p211);
+                button.setText("点击保存图片");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        saveImageToGallery(getContext(),bitmap);
+                        File file5 = new File("/storage/emulated/0/wordcloud/wordcloud.jpg");
+                        file5.delete();
+                    }
+                });
+                rootLayout.addView(button,button_parent_params);}
+        }}
+
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -111,5 +148,12 @@ public class MyFragment5 extends Fragment {
             Toast.makeText(context, "图片已保存至相册！", Toast.LENGTH_SHORT).show();
         }
         //file5.delete();
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        v=null;
+
+    }
     }
 
