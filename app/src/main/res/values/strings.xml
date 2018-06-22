@@ -2,7 +2,7 @@
     <string name="app_name">炫云</string>
     <string name="log1">登录：</string>
     <string name="log2">注册：</string>
-    <string name="username">用户名（手机号码）</string>
+    <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="zhuce">请输入用户名和密码</string>
     <string name="zhuce2">确认</string>
@@ -18,7 +18,7 @@
     <string name="c2">word文件</string>
     <string name="c20">注册</string>
     <string name="c3">url链接（功能尚未开放，敬请期待）</string>
-    <string name="c4">直接输入文本（输入完毕请点击确认）</string>
+    <string name="c4">直接输入文本</string>
     <string name="c5">语音输入</string>
     <string name="p11">上传txt文件</string>
     <string name="p12">上传Word文件</string>

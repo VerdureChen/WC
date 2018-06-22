@@ -52,7 +52,7 @@ public class POST {
         RequestBody jsonbody = RequestBody.create(JSON,json);
 
         final Request request = new Request.Builder()
-                .url("http://wc.justjian.site/api/t")
+                .url("http://wc.ever404.com/api/t")
                 .post(jsonbody)
                 .build();
 
@@ -138,7 +138,7 @@ public class POST {
         RequestBody jsonbody = RequestBody.create(JSON,json);
 
         final Request request = new Request.Builder()
-                .url("http://wc.justjian.site/api/register")
+                .url("http://wc.ever404.com/api/register")
                 .post(jsonbody)
                 .build();
 
@@ -195,7 +195,7 @@ public class POST {
         RequestBody jsonbody = RequestBody.create(JSON,json);
 
         final Request request = new Request.Builder()
-                .url("http://wc.justjian.site/api/login")
+                .url("http://wc.ever404.com/api/login")
                 .post(jsonbody)
                 .build();
 
@@ -259,7 +259,7 @@ public class POST {
         RequestBody jsonbody = RequestBody.create(JSON,json);
 
         final Request request = new Request.Builder()
-                .url("http://wc.justjian.site/api/retrive")
+                .url("http://wc.ever404.com/api/retrive")
                 .post(jsonbody)
                 .build();
 

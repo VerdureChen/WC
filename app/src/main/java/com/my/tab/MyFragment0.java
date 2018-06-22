@@ -161,6 +161,9 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                         if(etext1.getText()==null||etext1.getText().length()<=0||etext2.getText()
                                 ==null||etext2.getText().length()<=0||sekbar.getProgress()!=100)
                             Toast.makeText(getActivity(),"完善信息并进行验证！",Toast.LENGTH_SHORT).show();
+                        else if(etext2.getText().length()<6){Toast.makeText(getActivity(),
+                                "请输入六位以上密码！",
+                                Toast.LENGTH_SHORT).show();}
                         else{
                         MainActivity.username = etext1.getText().toString();
                         MainActivity.password = etext2.getText().toString();
@@ -314,6 +317,9 @@ public class MyFragment0 extends Fragment implements RadioGroup.OnCheckedChangeL
                         if(etext11.getText()==null||etext11.getText().length()<=0||etext22.getText()
                                 ==null||etext22.getText().length()<=0||sekbar1.getProgress()!=100)
                             Toast.makeText(getActivity(),"完善信息并进行验证！",Toast.LENGTH_SHORT).show();
+                        else if(etext22.getText().length()<6){Toast.makeText(getActivity(),
+                                "请输入六位以上密码！",
+                                Toast.LENGTH_SHORT).show();}
                         else {
                         MainActivity.username = etext11.getText().toString();
                         MainActivity.password = etext22.getText().toString();
